@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -47,6 +47,7 @@ const HomeScreen = () => {
                 renderItem={({ item }) => {
                     return (
                         <View>
+                            <Image source={{ uri: item.image }} />
                             <Text>{item.title}</Text>
                         </View>
                     )
