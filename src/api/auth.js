@@ -22,3 +22,7 @@ export const registerUser = async (data) => {
     return response;
 }
 
+export const loginUser = async (data) => {
+    const response = await makeApiRequest('POST', '/user/login-user', data)
+    return response;
+}

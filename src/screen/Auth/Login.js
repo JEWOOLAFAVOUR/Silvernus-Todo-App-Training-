@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FormButton from '../../components/Button/FormButton';
 import FormInput from '../../components/Input/FormInput';
-import { registerUser } from '../../api/auth';
+import { loginUser, registerUser } from '../../api/auth';
 
 
 const Login = () => {
@@ -32,9 +32,9 @@ const Login = () => {
             const body = { firstname, lastname, email, password }
             console.log('details submitted', body)
 
-            const { status, data } = await registerUser(body);
+            const { status, data } = await loginUser(body);
 
-            console.log('response from api', data)
+            console.log('response from login api', data)
 
 
         }
