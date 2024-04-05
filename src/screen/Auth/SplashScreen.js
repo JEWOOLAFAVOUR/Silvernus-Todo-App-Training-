@@ -7,7 +7,7 @@ const SplashScreen = ({ }) => {
     const navigation = useNavigation();
 
     const handleNext = () => {
-        navigation.navigate("AddProduct")
+        navigation.navigate("Login")
     }
 
     useEffect(() => {

@@ -3,27 +3,18 @@ import React, { useState } from 'react'
 import { COLOR, SIZES } from '../../constants/theme'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FormButton from '../../components/Button/FormButton';
+import FormInput from '../../components/Input/FormInput';
 
 
 const Login = () => {
     const navigation = useNavigation();
 
-    const [userName, setUserName] = useState('')
 
-    const handleSubmit = async () => {
-        try {
+    const handleSubmit = () => {
 
-            if (userName === "") {
-                console.log('Enter Name Details')
-            } else {
-                await AsyncStorage.setItem('name', userName)
-                console.log('name saved successfully')
-                navigation.navigate('Main')
-            }
-        } catch (error) {
-            console.log('error while saving', error)
-        }
     }
+
 
     return (
         <View style={styles.page}>
@@ -32,21 +23,13 @@ const Login = () => {
 
             <Text>Welcome to Favour Todo Application</Text>
             {/* INPUTS */}
-            <View style={{ marginTop: SIZES.h5 }}>
-                <Text>Name</Text>
-                <View style={styles.container}>
-                    <TextInput
-                        placeholder='Enter name'
-                        value={userName}
-                        onChangeText={(data) => setUserName(data)}
 
-                    />
-                </View>
-            </View>
-
-            <TouchableOpacity onPress={() => handleSubmit()} style={styles.btn}>
-                <Text style={{ fontSize: 16, color: COLOR.white }}>Continue</Text>
-            </TouchableOpacity>
+            <FormInput title="First Name" placeholder={'enter your firstname'} />
+            <FormInput title="Last Name" placeholder={'enter your lastname'} />
+            <FormInput title="Email" placeholder={'enter your email'} />
+            <FormInput title="Password" placeholder={'enter your password'} />
+            {/* BUTTONS */}
+            <FormButton title="Login" />
         </View>
     )
 }
@@ -59,20 +42,5 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR.white,
         paddingHorizontal: SIZES.p,
         paddingTop: SIZES.h3
-    },
-    container: {
-        height: SIZES.big,
-        borderWidth: 1,
-        marginTop: SIZES.base,
-        justifyContent: 'center',
-        paddingHorizontal: SIZES.p
-    },
-    btn: {
-        height: SIZES.big * 1.3,
-        backgroundColor: COLOR.primary,
-        borderRadius: SIZES.base,
-        marginTop: SIZES.h1,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 })
