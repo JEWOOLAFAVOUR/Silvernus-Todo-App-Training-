@@ -5,14 +5,39 @@ import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FormButton from '../../components/Button/FormButton';
 import FormInput from '../../components/Input/FormInput';
+import { registerUser } from '../../api/auth';
 
 
 const Login = () => {
     const navigation = useNavigation();
 
+    // STATES 
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleSubmit = () => {
 
+    const handleSubmit = async () => {
+        if (firstname === "") {
+            console.log('First Name is missing!')
+        } else if (lastname === "") {
+            console.log("Last Name is missing!")
+        } else if (email === "") {
+            console.log('Email is missing!')
+        } else if (password === "") {
+            console.log('Password is missing!')
+        } else {
+
+            const body = { firstname, lastname, email, password }
+            console.log('details submitted', body)
+
+            const { status, data } = await registerUser(body);
+
+            console.log('response from api', data)
+
+
+        }
     }
 
 
@@ -21,15 +46,15 @@ const Login = () => {
             <Text style={{ fontSize: SIZES.h2, color: COLOR.black, fontWeight: 'bold' }}>Login Page</Text>
 
 
-            <Text>Welcome to Favour Todo Application</Text>
+            <Text style={{ fontSize: SIZES.h5, color: COLOR.black, marginVertical: SIZES.h3 }}>Welcome to Favour Todo Application</Text>
             {/* INPUTS */}
 
-            <FormInput title="First Name" placeholder={'enter your firstname'} />
-            <FormInput title="Last Name" placeholder={'enter your lastname'} />
-            <FormInput title="Email" placeholder={'enter your email'} />
-            <FormInput title="Password" placeholder={'enter your password'} />
+            <FormInput title="First Name" placeholder={'enter your firstname'} value={firstname} setValue={setFirstName} />
+            <FormInput title="Last Name" placeholder={'enter your lastname'} value={lastname} setValue={setLastName} />
+            <FormInput title="Email" placeholder={'enter your email'} value={email} setValue={setEmail} />
+            <FormInput title="Password" placeholder={'enter your password'} value={password} setValue={setPassword} />
             {/* BUTTONS */}
-            <FormButton title="Login" />
+            <FormButton title="Login" onPress={() => handleSubmit()} />
         </View>
     )
 }

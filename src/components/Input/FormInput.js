@@ -2,13 +2,15 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 import { SIZES } from '../../constants/theme'
 
-const FormInput = ({ title, placeholder }) => {
+const FormInput = ({ title, placeholder, value, setValue }) => {
     return (
         <View style={{ marginBottom: SIZES.h5 }}>
             <Text>{title}</Text>
             <View style={styles.container}>
                 <TextInput
                     placeholder={placeholder}
+                    value={value}
+                    onChangeText={setValue}
 
                 />
             </View>

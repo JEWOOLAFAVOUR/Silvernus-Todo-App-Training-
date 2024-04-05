@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { COLOR, SIZES } from '../../constants/theme'
 
-const FormButton = () => {
+const FormButton = ({ onPress }) => {
     return (
-        <TouchableOpacity onPress={() => { }} style={styles.btn}>
+        <TouchableOpacity onPress={onPress} style={styles.btn}>
             <Text style={{ fontSize: 16, color: COLOR.white }}>Continue</Text>
         </TouchableOpacity>
     )
