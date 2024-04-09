@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import FormButton from '../../components/Button/FormButton';
 import FormInput from '../../components/Input/FormInput';
 import { loginUser, registerUser } from '../../api/auth';
+import Toast from 'react-native-toast-message';
 
 
 const Login = () => {
@@ -16,6 +17,19 @@ const Login = () => {
     const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const favour = {
+        name: 'Favour',
+        level: {
+            name: '400',
+            type: 400,
+        },
+        age: 10,
+        passion: ['tech', 'coding']
+    }
+
+    console.log(favour.name)
+
 
 
     const handleSubmit = async () => {
@@ -35,6 +49,17 @@ const Login = () => {
             const { status, data } = await loginUser(body);
 
             console.log('response from login api', data)
+            if (status < 300) {
+                Toast.show({
+                    type: 'success',
+                    text1: data?.message || 'No message',
+                })
+            } else {
+                Toast.show({
+                    type: 'error',
+                    text1: 'A problem occured',
+                })
+            }
 
 
         }
