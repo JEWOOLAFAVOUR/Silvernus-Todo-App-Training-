@@ -7,6 +7,7 @@ import FormButton from '../../components/Button/FormButton';
 import FormInput from '../../components/Input/FormInput';
 import { loginUser, registerUser } from '../../api/auth';
 import Toast from 'react-native-toast-message';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 const Login = () => {
@@ -17,6 +18,9 @@ const Login = () => {
     const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [load, setLoad] = useState(false);
+
 
     const favour = {
         name: 'Favour',
@@ -46,7 +50,9 @@ const Login = () => {
             const body = { firstname, lastname, email, password }
             console.log('details submitted', body)
 
-            const { status, data } = await loginUser(body);
+            setLoad(true);
+            const { status, data } = await verifyLater(body);
+            setLoad(false);
 
             console.log('response from login api', data)
             if (status < 300) {
@@ -68,6 +74,15 @@ const Login = () => {
 
     return (
         <View style={styles.page}>
+
+            {load &&
+                <Spinner
+                    visible={true}
+                    size={'large'}
+                    color='blue'
+                />
+            }
+
             <Text style={{ fontSize: SIZES.h2, color: COLOR.black, fontWeight: 'bold' }}>Login Page</Text>
 
 
